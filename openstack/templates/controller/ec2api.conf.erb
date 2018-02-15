@@ -1,0 +1,26 @@
+[DEFAULT]
+ec2api_listen=<%= @controller_mgt_ip %>
+log_file=/var/log/ec2api/ec2api.log
+keystone_url=http://<%= @controller_mgt_ip %>:5000/v2.0
+my_ip=<%= @controller_mgt_ip %>
+full_vpc_support=false
+
+[None]
+
+[database]
+connection = mysql+pymysql://ec2api:<%= @ec2api_db %>@<%= @controller_mgt_ip %>/ec2api
+
+[keystone_authtoken]
+auth_uri = http://<%= @controller_mgt_ip %>:5000
+auth_url = http://<%= @controller_mgt_ip %>:35357
+memcached_servers = <%= @controller_mgt_ip %>:11211
+auth_type = password
+project_domain_name = default
+user_domain_name = default
+project_name = service
+username = ec2api
+password = <%= @ec2api_user %>
+
+[metadata]
+metadata_proxy_shared_secret = <%= @metadata_secret %>
+

@@ -1,0 +1,22 @@
+[DEFAULT]
+[ml2]
+type_drivers = flat,vlan
+tenant_network_types =
+mechanism_drivers = linuxbridge
+extension_drivers = port_security
+
+# provider1: 3438 VLAN (global_physnet_mtu)
+# provider2: 10.x NAT
+physical_network_mtus = <%= @interfaces_mtu %>
+path_mtu = 9000
+
+[ml2_type_flat]
+flat_networks = <%= @interfaces_flat %>
+
+[ml2_type_geneve]
+[ml2_type_gre]
+[ml2_type_vlan]
+[ml2_type_vxlan]
+
+[securitygroup]
+enable_ipset = true
